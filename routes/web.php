@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\ExpensCategoryController;
+use App\Http\Controllers\ExpensTitleController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IncomeController;
-use App\Http\Controllers\IncomeCategoryController ; 
+use App\Http\Controllers\IncomeCategoryController ;
+use App\Http\Controllers\IncomeTitleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,4 +30,9 @@ Route::group(['middleware' => 'auth'], function(){
     // income section here...
    // Route::get('/category', [IncomeController::class, 'categoryIndex'])->name('category.index');
     Route::resource('incomecategory', IncomeCategoryController::class);
+    Route::resource('incometitle', IncomeTitleController::class);
+    Route::resource('expenscategory', ExpensCategoryController::class);
+    Route::resource('expenstitle', ExpensTitleController::class);
+
+
 });

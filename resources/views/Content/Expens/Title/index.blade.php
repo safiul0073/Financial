@@ -14,30 +14,30 @@
         @endif
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Income Category</h1>
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#categoryAdd"><i
-                class="fas fa-download fa-sm text-white-50" ></i> Add Category</a>
+        <h1 class="h3 mb-0 text-gray-800">Expens Title</h1>
+        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#expenAdd"><i
+                class="fas fa-download fa-sm text-white-50" ></i> Add Expens Title</a>
     </div>
 
     {{--  model for categories --}}
 
 
-    <div class="modal fade modelCategory" id="categoryAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade modelTitle" id="expenAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                   <h5 class="modal-title" id="exampleModalLabel">Income Category</h5>
+                   <h5 class="modal-title" id="exampleModalLabel">Expens Title</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                  <form action="{{route('incomecategory.store')}}" method='POST'>
+                  <form action="{{route('expenstitle.store')}}" method='POST'>
                         @csrf
                     <div class="form-group">
                         <label for="modalTitle">Title:</label>
-                        <input required type="text" id="modalTitle" class="form-control " name="title" placeholder='Enter Category Title...'>
+                        <input required type="text" id="modalTitle" class="form-control " name="title" placeholder='Enter Expens Title...'>
 
                     </div>
 
@@ -70,13 +70,13 @@
                     </thead>
 
                     <tbody>
-                    @foreach($categories as $key=>$category)
+                    @foreach($expens as $key=>$expen)
                         <tr>
 
                             <td>{{ $key + 1}}</td>
-                            <td id="title{{$category->id }}">{{$category->title}}</td>
+                            <td id="title{{$expen->id }}">{{$expen->title}}</td>
                             <td>
-                                <a type="button" data-toggle="modal" data-target="#categoryAdd{{$category->id}}"
+                                <a type="button" data-toggle="modal" data-target="#expenAdd{{$expen->id}}"
                                     style="color: #1D8348;"
                                     >
                                     <i class="fas fa-edit"></i>
@@ -90,26 +90,26 @@
 
                         </tr>
 
-                        <div class="modal fade modelCategory" id="categoryAdd{{$category->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        <div class="modal fade modelTitle" id="expenAdd{{$expen->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Income Category</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Expens Title</h5>
                                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">×</span>
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                    <form action="{{route('incomecategory.update', $category->id)}}" method='POST'>
+                                    <form action="{{route('expenstitle.update', $expen->id)}}" method='POST'>
                                             @csrf
                                             @method('PUT')
                                         <div class="form-group">
                                             <label for="modalTitle">Title:</label>
-                                            <input type="text" id="modalTitle" class="form-control" value="{{!empty($category) ? $category->title : ''}}" name="title" placeholder='Enter Category Title...'>
+                                            <input type="text" id="modalTitle" class="form-control" value="{{!empty($expen) ? $expen->title : ''}}" name="title" placeholder='Enter Expens Title...'>
                                         </div>
 
-                                        <input type="hidden" id="modalCategoryId">
+                                        <input type="hidden" id="modalTitleId">
 
 
                                     </div>
