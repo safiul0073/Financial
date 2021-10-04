@@ -91,7 +91,7 @@
     </div>
 
     @include('static.js')
-    @stack('js')
+    @yield('js')
 </body>
 
 </html>

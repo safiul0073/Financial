@@ -13,8 +13,8 @@ class IncomeCategoryController extends Controller
      */
     public function index()
     {
-        $categories = IncameCategory::all();
-        
+        $categories = IncameCategory::latest()->get();
+
         return view('Content.Income.Category.index',compact('categories'));
     }
 
@@ -36,12 +36,13 @@ class IncomeCategoryController extends Controller
      */
     public function store(Request $request)
      {
-        // dd($request->all());
-        //$category = $request->title;
+        $this->validate($request, [
+            "title" => "required"
+        ]);
         IncameCategory::create([
             'title' => $request->title
         ]);
-        return view('Content.Income.Category.index');
+        return redirect()->back()->with('success','Incame Category added successfully.');
 
     }
 
@@ -68,24 +69,18 @@ class IncomeCategoryController extends Controller
         return redirect()->route('incomecategory.index');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            "title" => "required"
+        ]);
+         IncameCategory::findOrFail($id)->update([
+            'title' => $request->title
+        ]);
+        return redirect()->back()->with('success','Incame Category Updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         //

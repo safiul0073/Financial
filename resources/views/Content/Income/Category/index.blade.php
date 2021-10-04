@@ -1,7 +1,17 @@
 @extends('layouts.app')
 @section('content')
 <div class="container-fluid">
-
+        @if(session('success'))
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <div class="alert-icon contrast-alert">
+                    <i class="fa fa-check"></i>
+                </div>
+                <div class="alert-message">
+                    <span><strong>Success!</strong> {{session('success')}} </span>
+                </div>
+            </div>
+        @endif
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Income Category</h1>
@@ -17,7 +27,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                   <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                   <h5 class="modal-title" id="exampleModalLabel">Income Category</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -25,10 +35,11 @@
                 <div class="modal-body">
                   <form action="{{route('incomecategory.store')}}" method='POST'>
                         @csrf
-                    <div class="modal-content">
-                        <input type="text" class="modal-content" value="{{!empty($category) ? $category->title : ''}}" name="title" placeholder='Enter Category Title:'>
-                    </div>
+                    <div class="form-group">
+                        <label for="modalTitle">Title:</label>
+                        <input required type="text" id="modalTitle" class="form-control " name="title" placeholder='Enter Category Title...'>
 
+                    </div>
 
                 </div>
                 <div class="modal-footer">
@@ -63,12 +74,53 @@
                         <tr>
 
                             <td>{{ $key + 1}}</td>
-                            <td>{{$category->title}}</td>
+                            <td id="title{{$category->id }}">{{$category->title}}</td>
                             <td>
-                                <a href="" data-toggle="modal" onclick="openModel({{$category->id}})" data-target="#categoryAdd{{ !empty($category->id) }}">edit</a>
+                                <a type="button" data-toggle="modal" data-target="#categoryAdd{{$category->id}}"
+                                    style="color: #1D8348;"
+                                    >
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a type="button""
+                                    style="color:#922B21;"
+                                    >
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
                             </td>
 
                         </tr>
+
+                        <div class="modal fade modelCategory" id="categoryAdd{{$category->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Income Category</h5>
+                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                    <form action="{{route('incomecategory.update', $category->id)}}" method='POST'>
+                                            @csrf
+                                            @method('PUT')
+                                        <div class="form-group">
+                                            <label for="modalTitle">Title:</label>
+                                            <input type="text" id="modalTitle" class="form-control" value="{{!empty($category) ? $category->title : ''}}" name="title" placeholder='Enter Category Title...'>
+                                        </div>
+
+                                        <input type="hidden" id="modalCategoryId">
+
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-primary" >Update</button>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                         @endforeach
 
 
@@ -80,13 +132,4 @@
 </div>
 @endsection
 
-@push('js')
-    <script type="text/javascript">
-        const model = document.getElementsByClassName('modelCategory');
 
-        openModel (id) {
-            console.log(model, id)
-        }
-
-    </script>
-@endpush
