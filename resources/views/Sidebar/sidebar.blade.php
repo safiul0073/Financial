@@ -51,7 +51,7 @@
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link" href="{{route('category.index')}}">
+        <a class="nav-link" href="{{route('incomecategory.index')}}">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Income Category</span></a>
         </a>

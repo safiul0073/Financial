@@ -17,7 +17,7 @@ class CreateIncamesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('incame_title_id');
             $table->unsignedBigInteger('incame_categorie_id');
-            $table->dacimal('amount')->default(0.00);
+            $table->decimal('amount')->default(0.00);
             $table->string('bayer_name')->nullable();
             $table->string('bayer_phone')->nullable();
             $table->date('incame_date')->nullable();

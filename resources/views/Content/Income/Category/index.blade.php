@@ -10,27 +10,36 @@
     </div>
 
     {{--  model for categories --}}
+    
+       
     <div class="modal fade" id="categoryAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                   <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>                    
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="modal-body">
+                  <form action="{{route('incomecategory.store')}}" method='POST'>
+                        @csrf
+                    <div class="modal-content">
+                        <input type="text" class="modal-content" value="{{!empty($category) ? $category->title : ''}}" name="title" placeholder='Enter Category Title:'>
+                    </div>
 
 
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <button type="submit" class="btn btn-primary" >Save</button>
                 </div>
+                </form>
             </div>
         </div>
     </div>
+  
 
 
 
@@ -43,24 +52,23 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
 
                     <tbody>
+                    @foreach($categories as $key=>$category)
                         <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td>2011/04/25</td>
-                            <td>$320,800</td>
+                        
+                            <td>{{ $key + 1}}</td>
+                            <td>{{$category->title}}</td>
+                            
+                        
                         </tr>
+                        @endforeach
+                      
 
                     </tbody>
                 </table>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IncomeController;
+use App\Http\Controllers\IncomeCategoryController ; 
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,5 +25,6 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/', [HomeController::class, 'index']);
 
     // income section here...
-    Route::get('/category', [IncomeController::class, 'categoryIndex'])->name('category.index');
+   // Route::get('/category', [IncomeController::class, 'categoryIndex'])->name('category.index');
+    Route::resource('incomecategory', IncomeCategoryController::class);
 });
