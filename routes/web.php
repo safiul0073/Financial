@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\IncomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,4 +22,7 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::group(['middleware' => 'auth'], function(){
     Route::get('/', [HomeController::class, 'index']);
+
+    // income section here...
+    Route::get('/category', [IncomeController::class, 'categoryIndex'])->name('category.index');
 });
