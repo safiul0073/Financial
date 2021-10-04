@@ -16,10 +16,11 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>Financial</title>
 
     @include('static.css')
 
+    @stack('css')
 </head>
 
 <body id="page-top">
@@ -90,7 +91,7 @@
     </div>
 
     @include('static.js')
-
+    @stack('js')
 </body>
 
 </html>

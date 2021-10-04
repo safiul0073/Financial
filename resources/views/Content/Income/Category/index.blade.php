@@ -10,14 +10,14 @@
     </div>
 
     {{--  model for categories --}}
-    
-       
-    <div class="modal fade" id="categoryAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+
+
+    <div class="modal fade modelCategory" id="categoryAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                   <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>                    
+                   <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -39,14 +39,14 @@
             </div>
         </div>
     </div>
-  
+
 
 
 
     {{-- table sectio here.... --}}
 
     <div class="card shadow mb-4">
-      
+
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -61,14 +61,16 @@
                     <tbody>
                     @foreach($categories as $key=>$category)
                         <tr>
-                        
+
                             <td>{{ $key + 1}}</td>
                             <td>{{$category->title}}</td>
-                            
-                        
+                            <td>
+                                <a href="" data-toggle="modal" onclick="openModel({{$category->id}})" data-target="#categoryAdd{{ !empty($category->id) }}">edit</a>
+                            </td>
+
                         </tr>
                         @endforeach
-                      
+
 
                     </tbody>
                 </table>
@@ -77,3 +79,14 @@
     </div>
 </div>
 @endsection
+
+@push('js')
+    <script type="text/javascript">
+        const model = document.getElementsByClassName('modelCategory');
+
+        openModel (id) {
+            console.log(model, id)
+        }
+
+    </script>
+@endpush
