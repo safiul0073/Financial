@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\IncameCategory;
+
+use App\Models\Incame;
+use App\Models\IncameTitle;
 use Illuminate\Http\Request;
 
-class IncomeCategoryController extends Controller
+class IncomeTitleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,9 +15,8 @@ class IncomeCategoryController extends Controller
      */
     public function index()
     {
-        $categories = IncameCategory::latest()->get();
-
-        return view('Content.Income.Category.index',compact('categories'));
+        $titles = IncameTitle::latest()->get();
+        return view('Content.Income.Title.index',compact('titles'));
     }
 
     /**
@@ -35,15 +36,14 @@ class IncomeCategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-     {
+    {
         $this->validate($request, [
             "title" => "required"
         ]);
-        IncameCategory::create([
+        IncameTitle::create([
             'title' => $request->title
         ]);
-        return redirect()->back()->with('success','Incame Category added successfully.');
-
+        return redirect()->back()->with('success','Incame Title added successfully.');
     }
 
     /**
@@ -65,25 +65,37 @@ class IncomeCategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = IncameCategory::find($id);
+        $title = IncameTitle::find($id);
         return redirect()->route('incomecategory.index');
     }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function update(Request $request, $id)
     {
         $this->validate($request, [
             "title" => "required"
         ]);
-         IncameCategory::findOrFail($id)->update([
+        IncameTitle::findOrFail($id)->update([
             'title' => $request->title
         ]);
-        return redirect()->back()->with('success','Incame Category Updated successfully.');
+        return redirect()->back()->with('success','Incame Title Updated successfully.');
     }
 
-
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function destroy($id)
     {
-        IncameCategory::find($id)->delete();
-        return redirect()->back()->with('success','Incame Category Deleted successfully.');
+        IncameTitle::find($id)->delete();
+        return redirect()->back()->with('success','Incame Title Delete successfully.');
     }
 }

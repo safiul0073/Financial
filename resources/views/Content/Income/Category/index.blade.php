@@ -81,11 +81,18 @@
                                     >
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a type="button""
+                                <!-- <a type="button"
                                     style="color:#922B21;"
                                     >
                                     <i class="fas fa-trash-alt"></i>
-                                </a>
+                                </a> -->
+                                <button type="button" style="color:#922B21;" onclick="deleteCategory({{ $category->id }})">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                                <form id="delete-form-{{ $category->id }}" action="{{route('incomecategory.destroy',$category->id)}}" method="POST" style="display: none;">
+                                    @csrf
+                                    @method('DELETE')
+                                </form>
                             </td>
 
                         </tr>
@@ -131,5 +138,48 @@
     </div>
 </div>
 @endsection
+@push('js')
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script type="text/javascript">
+   function deleteCategory(id){
+
+        const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+        title: 'Are you sure?',
+        text: "You want to delete this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true
+        }).then((result) => {
+        if (result.isConfirmed) {
+        event.preventDefault();
+        document.getElementById('delete-form-'+id).submit();
+        } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+        ) {
+        swalWithBootstrapButtons.fire(
+        'Cancelled',
+        'Your imaginary file is safe :)',
+        'error'
+        )
+        }
+        })
+
+}
+</script>
+
+@endpush
+
 
 

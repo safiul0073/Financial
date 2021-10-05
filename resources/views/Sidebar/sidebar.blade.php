@@ -59,18 +59,11 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsetitle"
-            aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link" href="{{route('incometitle.index')}}">
             <i class="fas fa-fw fa-cog"></i>
             <span>Income Title</span>
         </a>
-        <div id="collapsetitle" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Title:</h6>
-                <a class="collapse-item" href="buttons.html">Add</a>
-                <a class="collapse-item" href="cards.html">Show</a>
-            </div>
-        </div>
+       
     </li>
 
     <li class="nav-item">
@@ -95,32 +88,18 @@
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseexcategory"
-            aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link" href="{{route('expenscategory.index')}}">
             <i class="fas fa-fw fa-cog"></i>
             <span>Expense Category</span>
         </a>
-        <div id="collapseexcategory" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Category:</h6>
-                <a class="collapse-item" href="buttons.html">Add</a>
-                <a class="collapse-item" href="cards.html">Show</a>
-            </div>
-        </div>
+        
     </li>
 
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseextitle"
-            aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link" href="{{route('expenstitle.index')}}">
             <i class="fas fa-fw fa-cog"></i>
             <span>Expense Title</span>
         </a>
-        <div id="collapseextitle" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Title:</h6>
-                <a class="collapse-item" href="buttons.html">Add</a>
-                <a class="collapse-item" href="cards.html">Show</a>
-            </div>
         </div>
     </li>
 

@@ -92,6 +92,8 @@
 
     @include('static.js')
     @yield('js')
+    @stack('js')
+    
 </body>
 
 </html>
