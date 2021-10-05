@@ -14,4 +14,11 @@
     <!-- Page level custom scripts -->
     <script src="{{ asset('assets') }}/js/demo/chart-area-demo.js"></script>
     <script src="{{ asset('assets') }}/js/demo/chart-pie-demo.js"></script>
-    
+
+    <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            }
+        });
+        </script>

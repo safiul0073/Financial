@@ -81,14 +81,9 @@
                                     >
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <!-- <a type="button"
-                                    style="color:#922B21;"
-                                    >
+                                <a type="button" style="color:#922B21;" onclick="deleteCategory({{ $category->id }})">
                                     <i class="fas fa-trash-alt"></i>
-                                </a> -->
-                                <button type="button" style="color:#922B21;" onclick="deleteCategory({{ $category->id }})">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
+                                </a>
                                 <form id="delete-form-{{ $category->id }}" action="{{route('incomecategory.destroy',$category->id)}}" method="POST" style="display: none;">
                                     @csrf
                                     @method('DELETE')
@@ -133,6 +128,11 @@
 
                     </tbody>
                 </table>
+
+                                        {{-- Pagination --}}
+                                <div class="d-flex justify-content-center">
+                                    {!! $categories->links() !!}
+                                </div>
             </div>
         </div>
     </div>

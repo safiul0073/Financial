@@ -14,9 +14,9 @@
         @endif
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Expens Title</h1>
+        <h1 class="h3 mb-0 text-gray-800">Income Title</h1>
         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#incomeAdd"><i
-                class="fas fa-download fa-sm text-white-50" ></i> Add Expens Title</a>
+                class="fas fa-download fa-sm text-white-50" ></i> Add Income Title</a>
     </div>
 
     {{--  model for categories --}}
@@ -39,6 +39,17 @@
                         <label for="modalTitle">Title:</label>
                         <input required type="text" id="modalTitle" class="form-control " name="title" placeholder='Enter Income Title...'>
 
+                    </div>
+                    <div class="form-group">
+                        <label >Income Category:</label>
+
+                        <select class="form-control" name="incame_categorie_id" id="">
+                            <option selected="selected">Select Income Category</option>
+                            @foreach ($categorys as $category)
+                                <option value="{{$category->id}}">{{$category->title}}</option>
+                            @endforeach
+
+                        </select>
                     </div>
 
                 </div>
@@ -65,6 +76,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Title</th>
+                            <th>Income Category</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -74,16 +86,17 @@
                         <tr>
 
                             <td>{{ $key + 1}}</td>
-                            <td id="title{{$title->id }}">{{$title->title}}</td>
+                            <td >{{$title->title}}</td>
+                            <td >{{$title->income_category? $title->income_category->title : ''}}</td>
                             <td>
                                 <a type="button" data-toggle="modal" data-target="#incomeAdd{{$title->id}}"
                                     style="color: #1D8348;"
                                     >
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <button type="button" style="color:#922B21;" onclick="deleteTitle({{ $title->id }})">
+                                <a type="button" style="color:#922B21;" onclick="deleteTitle({{ $title->id }})">
                                     <i class="fas fa-trash-alt"></i>
-                                </button>
+                                </a>
                                 <form id="delete-form-{{ $title->id }}" action="{{route('incometitle.destroy',$title->id)}}" method="POST" style="display: none;">
                                     @csrf
                                     @method('DELETE')
@@ -111,7 +124,22 @@
                                             <input type="text" id="modalTitle" class="form-control" value="{{!empty($title) ? $title->title : ''}}" name="title" placeholder='Enter Expens Title...'>
                                         </div>
 
-                                        <input type="hidden" id="modalTitleId">
+                                        <div class="form-group">
+                                            <label >Income Category:</label>
+
+                                            <select class="form-control" name="incame_categorie_id" id="">
+                                                <option selected="selected">Select Income Category</option>
+                                                @foreach ($categorys as $category)
+                                                    @if (!empty($title->income_category) && $title->incame_categorie_id == $category->id)
+                                                        <option selected="selected" value="{{$category->id}}">{{$category->title}}</option>
+                                                    @else
+                                                    <option value="{{$category->id}}">{{$category->title}}</option>
+                                                    @endif
+                                                @endforeach
+
+
+                                            </select>
+                                        </div>
 
 
                                     </div>
@@ -128,6 +156,10 @@
 
                     </tbody>
                 </table>
+
+                <div class="d-flex justify-content-center">
+                    {!! $titles->links() !!}
+                </div>
             </div>
         </div>
     </div>

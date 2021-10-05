@@ -14,9 +14,9 @@
         @endif
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Expens Category</h1>
+        <h1 class="h3 mb-0 text-gray-800">Expenes Category</h1>
         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#categoryAdd"><i
-                class="fas fa-download fa-sm text-white-50" ></i> Add Expens Category</a>
+                class="fas fa-download fa-sm text-white-50" ></i> Add Expenes Category</a>
     </div>
 
     {{--  model for categories --}}
@@ -81,14 +81,10 @@
                                     >
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <!-- <a type="button"
-                                    style="color:#922B21;"
-                                    >
+
+                                <a type="button" style="color:#922B21;" onclick="deleteCategory({{ $expen->id }})">
                                     <i class="fas fa-trash-alt"></i>
-                                </a> -->
-                                <button type="button" style="color:#922B21;" onclick="deleteCategory({{ $expen->id }})">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
+                                </a>
                                 <form id="delete-form-{{ $expen->id }}" action="{{route('expenscategory.destroy',$expen->id)}}" method="POST" style="display: none;">
                                     @csrf
                                     @method('DELETE')
@@ -133,6 +129,10 @@
 
                     </tbody>
                 </table>
+                        {{-- Pagination --}}
+                    <div class="d-flex justify-content-center">
+                        {!! $expens->links() !!}
+                    </div>
             </div>
         </div>
     </div>

@@ -8,5 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class ExpenseTitle extends Model
 {
     use HasFactory;
-    protected $guarded = [];
+    protected $fillable = [
+        'title',
+        'expense_categorie_id'
+    ];
+
+    public function expense_category(){
+        return $this->belongsTo(ExpenseCategory::class, 'expense_categorie_id', 'id');
+    }
 }

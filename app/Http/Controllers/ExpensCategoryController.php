@@ -14,8 +14,9 @@ class ExpensCategoryController extends Controller
      */
     public function index()
     {
-        $expens = ExpenseCategory::latest()->get();
-        return view('Content.Expens.Category.index',compact('expens'));
+        $expens = ExpenseCategory::paginate(10);
+
+        return view('content.expens.category.index',compact('expens'));
     }
 
     /**

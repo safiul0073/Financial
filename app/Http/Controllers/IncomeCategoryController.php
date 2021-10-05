@@ -13,9 +13,9 @@ class IncomeCategoryController extends Controller
      */
     public function index()
     {
-        $categories = IncameCategory::latest()->get();
+        $categories = IncameCategory::paginate(10);
 
-        return view('Content.Income.Category.index',compact('categories'));
+        return view('content.income.category.index',compact('categories'));
     }
 
     /**

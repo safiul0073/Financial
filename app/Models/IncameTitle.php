@@ -8,9 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class IncameTitle extends Model
 {
     use HasFactory;
+    protected $table='incame_titles';
+    protected $fillable = [
+        'title',
+        'incame_categorie_id'
+    ];
 
-    protected $guarded = [];
-    public function incame_category(){
-        return $this->belongsTo(IncomeCategory::class,'incame_category_id',"id");
+    public function income_category(){
+        return $this->belongsTo(IncameCategory::class, 'incame_categorie_id', 'id');
     }
+
 }

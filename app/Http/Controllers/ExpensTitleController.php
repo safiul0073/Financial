@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ExpenseCategory;
 use App\Models\ExpenseTitle;
 use Illuminate\Http\Request;
 
@@ -14,8 +15,9 @@ class ExpensTitleController extends Controller
      */
     public function index()
     {
-        $expens = ExpenseTitle::latest()->get();
-        return view('Content.Expens.Title.index',compact('expens'));
+        $expens = ExpenseTitle::with('expense_category')->paginate(10);
+        $expensCategorys = ExpenseCategory::latest()->get();
+        return view('content.expens.title.index',compact('expens', 'expensCategorys'));
     }
 
     /**
@@ -39,9 +41,7 @@ class ExpensTitleController extends Controller
         $this->validate($request, [
             "title" => "required"
         ]);
-        ExpenseTitle::create([
-            'title' => $request->title
-        ]);
+        ExpenseTitle::create($request->all());
         return redirect()->back()->with('success','Expens Title added successfully.');
     }
 
@@ -64,25 +64,16 @@ class ExpensTitleController extends Controller
      */
     public function edit($id)
     {
-        $expen = ExpenseTitle::find($id);
-        return redirect()->route('expenstitle.index');
+
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
         $this->validate($request, [
             "title" => "required"
         ]);
-        ExpenseTitle::findOrFail($id)->update([
-            'title' => $request->title
-        ]);
+        ExpenseTitle::findOrFail($id)->update($request->all());
         return redirect()->back()->with('success','Expens Title Updated successfully.');
     }
 

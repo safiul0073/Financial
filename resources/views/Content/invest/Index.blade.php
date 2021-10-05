@@ -14,43 +14,44 @@
         @endif
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Expense Title</h1>
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#expenAdd"><i
-                class="fas fa-download fa-sm text-white-50" ></i> Add Expense Title</a>
+        <h1 class="h3 mb-0 text-gray-800 text-uppercase">Invest For Your Partner</h1>
+        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#incomeAdd"><i
+                class="fas fa-download fa-sm text-white-50" ></i>Add New Invest</a>
     </div>
 
-    {{--  model for title --}}
-    <div class="modal fade modelTitle" id="expenAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    {{--  model for categories --}}
+
+
+    <div class="modal fade modelTitle" id="incomeAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                   <h5 class="modal-title" id="exampleModalLabel">Expens Title</h5>
+                   <h5 class="modal-title" id="exampleModalLabel">Invest Amount For Your Partner</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                  <form action="{{route('expenstitle.store')}}" method='POST'>
+                  <form action="{{route('invest.store')}}" method='POST'>
                         @csrf
                     <div class="form-group">
-                        <label for="modalTitle">Title:</label>
-                        <input required type="text" id="modalTitle" class="form-control " name="title" placeholder='Enter Expens Title...'>
+                        <label for="modalTitle">Investment Amount:</label>
+                        <input required type="number" id="modalTitle" class="form-control " name="amount" placeholder='Enter Amount...'>
+
                     </div>
                     <div class="form-group">
-                        <label >Income Category:</label>
+                        <label >Select Partner:</label>
 
-                        <select class="form-control" name="expense_categorie_id" id="">
-                            <option selected="selected">Select Expense Category</option>
-
-                            @foreach ($expensCategorys as $category)
-
-                                <option value="{{$category->id}}">{{$category->title}}</option>
-
+                        <select required class="form-control" name="user_id" id="">
+                            <option selected="selected">Select Partner</option>
+                            @foreach ($partners as $partner)
+                                <option value="{{$partner->id}}">{{$partner->name}}</option>
                             @endforeach
 
                         </select>
                     </div>
+
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
@@ -74,30 +75,29 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Title</th>
-                            <th>Category</th>
+                            <th>Pertner Name</th>
+                            <th>Invest Amount</th>
                             <th>Action</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                    @foreach($expens as $key=>$expen)
+                    @foreach($invests as $key=>$invest)
                         <tr>
 
                             <td>{{ $key + 1}}</td>
-                            <td >{{$expen->title}}</td>
-                            <td >{{$expen->expense_category? $expen->expense_category->title : ''}}</td>
+                            <td >{{$invest->user->name}}</td>
+                            <td >{{$invest->amount}}</td>
                             <td>
-                                <a type="button" data-toggle="modal" data-target="#expenAdd{{$expen->id}}"
+                                <a type="button" data-toggle="modal" data-target="#incomeAdd{{$invest->id}}"
                                     style="color: #1D8348;"
                                     >
                                     <i class="fas fa-edit"></i>
                                 </a>
-
-                                <a type="button" style="color:#922B21;" onclick="deleteTitle({{$expen->id}})">
+                                <a type="button" style="color:#922B21;" onclick="deleteTitle({{ $invest->id }})">
                                     <i class="fas fa-trash-alt"></i>
                                 </a>
-                                <form id="delete-form-{{ $expen->id }}" action="{{route('expenstitle.destroy',$expen->id)}}" method="POST" style="display: none;">
+                                <form id="delete-form-{{ $invest->id }}" action="{{route('invest.destroy',$invest->id)}}" method="POST" style="display: none;">
                                     @csrf
                                     @method('DELETE')
                                 </form>
@@ -105,7 +105,7 @@
 
                         </tr>
 
-                        <div class="modal fade modelTitle" id="expenAdd{{$expen->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        <div class="modal fade modelTitle" id="incomeAdd{{$invest->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -116,29 +116,31 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                    <form action="{{route('expenstitle.update', $expen->id)}}" method='POST'>
+                                    <form action="{{route('invest.update', $invest->id)}}" method='POST'>
                                             @csrf
                                             @method('PUT')
                                         <div class="form-group">
                                             <label for="modalTitle">Title:</label>
-                                            <input type="text" id="modalTitle" class="form-control" value="{{!empty($expen) ? $expen->title : ''}}" name="title" placeholder='Enter Expens Title...'>
+                                            <input type="text" id="modalTitle" class="form-control" value="{{!empty($invest) ? $invest->amount : ''}}" name="amount" placeholder='Enter amount...'>
                                         </div>
+
                                         <div class="form-group">
                                             <label >Income Category:</label>
 
-                                            <select class="form-control" name="expense_categorie_id" id="">
-                                                <option selected="selected">Select Expense Category</option>
-
-                                                @foreach ($expensCategorys as $category)
-                                                        @if (!empty($expen->expense_category) && $expen->expense_categorie_id == $category->id)
-                                                            <option selected="selected" value="{{$category->id}}">{{$category->title}}</option>
-                                                        @else
-                                                        <option value="{{$category->id}}">{{$category->title}}</option>
-                                                        @endif
+                                            <select class="form-control" name="user_id" id="">
+                                                <option selected="selected">Select Income Category</option>
+                                                @foreach ($partners as $partner)
+                                                    @if (!empty($invest->user) && $invest->user_id == $partner->id)
+                                                        <option selected="selected" value="{{$partner->id}}">{{$partner->name}}</option>
+                                                    @else
+                                                    <option value="{{$partner->id}}">{{$partner->name}}</option>
+                                                    @endif
                                                 @endforeach
+
 
                                             </select>
                                         </div>
+
 
                                     </div>
                                     <div class="modal-footer">
@@ -154,8 +156,9 @@
 
                     </tbody>
                 </table>
+
                 <div class="d-flex justify-content-center">
-                    {!! $expens->links() !!}
+                    {!! $invests->links() !!}
                 </div>
             </div>
         </div>
