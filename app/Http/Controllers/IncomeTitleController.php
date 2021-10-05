@@ -95,6 +95,7 @@ class IncomeTitleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        IncameTitle::find($id)->delete();
+        return redirect()->back()->with('success','Incame Title Delete successfully.');
     }
 }

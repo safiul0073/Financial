@@ -83,7 +83,7 @@ class IncomeCategoryController extends Controller
 
     public function destroy($id)
     {
-        // IncameCategory::find($id)->delete();
-        // return redirect()->back();
+        IncameCategory::find($id)->delete();
+        return redirect()->back()->with('success','Incame Category Deleted successfully.');
     }
 }

@@ -94,6 +94,7 @@ class ExpensTitleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        ExpenseTitle::find($id)->delete();
+        return redirect()->back()->with('success','Expens Title Deleted successfully.');
     }
 }
