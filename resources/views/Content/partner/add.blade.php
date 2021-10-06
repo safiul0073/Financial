@@ -15,12 +15,11 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Partner Information</h1>
-        <a href="{{route('partner.index')}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                class="fas fa-download fa-sm text-white-50" ></i>Partner</a>
+        <a href="{{route('partner.index')}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Partners</a>
     </div>
 
     <div class="row">
-        <div class="col-6 mx-auto">
+        <div class="col-12 col-xl-6 col-lg-6 col-md-8 col-sm-10 mx-auto">
             <div class="card">
                 <div class="card-body">
                     <form action="{{!empty($user) ? route('partner.update', $user->id) : route('partner.store')}}"  method='POST'>
@@ -73,7 +72,7 @@
                         <div class="form-group">
                             <label for="initial_amount">Initial Investment:</label>
                             <input type="text" id="initial_amount"
-                                    value="{{!empty($user) ? $user->initial_amount : ''}}"
+                                    value="{{!empty($user->invest) ? $user->invest->amount : ''}}"
                                     class="form-control @error('initial_amount') is-invalid @enderror"
                                     placeholder="Enter Pertner Amount..."
                                     name="initial_amount">

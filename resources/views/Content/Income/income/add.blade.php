@@ -20,7 +20,7 @@
     </div>
 
     <div class="row">
-        <div class="col-6 mx-auto">
+        <div class="col-12 col-xl-6 col-lg-6 col-md-8 col-sm-10 mx-auto">
             <div class="card">
                 <div class="card-body">
                     <form action="{{!empty($incame) ? route('incame.update', $incame->id) : route('incame.store')}}"  method='POST'>

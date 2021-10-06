@@ -10,7 +10,8 @@ class PartnerController extends Controller
 
     public function index()
     {
-        $partners = User::where('role', 0)->paginate(10);
+        $partners = User::where('role', 0)->with('invest')->paginate(10);
+
         return view('content.partner.index', compact('partners'));
     }
 
@@ -22,7 +23,7 @@ class PartnerController extends Controller
 
     public function store(Request $request)
     {
-        $user = $this->validate($request, [
+        $attributes = $this->validate($request, [
             "name" => "min:2|unique:users",
             'email' => "unique:users| email",
             'initial_amount' => 'regex:/^\d+(\.\d{1,2})?$/',
@@ -30,8 +31,9 @@ class PartnerController extends Controller
             'address' => 'max:256'
 
         ]);
-        // dd($request->all());
-        User::create($user);
+
+        $user = User::create($attributes);
+        $user->invest()->create(['amount' => $request->initial_amount]);
         return redirect()
                ->route('partner.index')
                ->with('success','Partner added successfully.');
@@ -47,7 +49,7 @@ class PartnerController extends Controller
     public function edit($id)
     {
 
-        $user = User::findOrFail($id);
+        $user = User::with('invest')->findOrFail($id);
 
         return view('content.partner.add', compact('user'));
     }
@@ -65,6 +67,7 @@ class PartnerController extends Controller
         ]);
         $user = User::findOrFail($id);
         $user->update($request->all());
+        $user->invest()->update(['amount' => $request->initial_amount]);
         return redirect()
                 ->back()
                 ->with('success','Partner Updated successfully.');
@@ -74,6 +77,7 @@ class PartnerController extends Controller
     public function destroy($id)
     {
         $user = User::findOrFail($id);
+        $user->invest()->delete();
         $user->delete();
         return redirect()->back()->with('success','Partner Deleted successfully.');
     }

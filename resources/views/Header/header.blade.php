@@ -2,7 +2,7 @@
 <nav  class="navbar navbar-expand bg-primary accordion navbar-dark  topbar mb-4 static-top shadow">
 
     <!-- Sidebar Toggle (Topbar) -->
-    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+    <button id="sidebarToggleTop" class=" bg-white btn btn-link d-md-none rounded-circle mr-3">
         <i class="fa fa-bars"></i>
     </button>
 
@@ -16,7 +16,8 @@
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 <span class="mr-2 d-none d-lg-inline text-gray-100 small">{{ auth()->user()->name }}</span>
-
+                <img class="img-profile rounded-circle"
+                src="{{ asset('assets') }}/img/undraw_profile.svg">
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

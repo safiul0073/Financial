@@ -15,8 +15,8 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Partners Information</h1>
-        <a href="{{route('partner.create')}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                class="fas fa-download fa-sm text-white-50" ></i> Add Partner</a>
+        <a href="{{route('partner.create')}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+            <i class="far fa-plus fa-sm text-white-100"></i>Add Partner</a>
     </div>
 
     {{-- table sectio here.... --}}
@@ -46,7 +46,7 @@
                                 <td >{{ $partner->name }}</td>
                                 <td >{{ $partner->email }}</td>
                                 <td >{{ $partner->phone }}</td>
-                                <td >{{ $partner->initial_amount }}</td>
+                                <td >{{ $partner->invest? $partner->invest->amount : ''}}</td>
                                 <td >{{$partner->address}}</td>
                                 <td>
                                     <a type="button"

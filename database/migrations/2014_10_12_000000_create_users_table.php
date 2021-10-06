@@ -20,7 +20,6 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->unsignedInteger('phone')->nullable();
-            $table->decimal('initial_amount',20,2)->default(0);
             $table->string('address')->nullable();
             $table->tinyInteger('role')->default(0);
             $table->rememberToken();

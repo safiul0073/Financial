@@ -23,7 +23,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        @include('Sidebar.sidebar')
+        @include('sidebar.sidebar')
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -33,7 +33,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                    @include('Header.header')
+                    @include('header.header')
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
@@ -64,7 +64,7 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-  
+
 
     @include('static.js')
     @yield('js')
