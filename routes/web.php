@@ -54,4 +54,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('income-report-index', [ReportController::class, 'incomeIndex'])->name('income.report.index');
     Route::post('expense-report-get', [ReportController::class, 'expenseReport'])->name('expense.report.get');
     Route::post('income-report-get', [ReportController::class, 'incomeReport'])->name('income.report.get');
+
+    // chart route here...
+    Route::get('incame-chart', [HomeController::class, 'incameChart']);
 });

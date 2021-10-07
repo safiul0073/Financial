@@ -14,7 +14,7 @@
         @endif
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800 text-uppercase">Report For Income</h1>
+        <h1 class="h3 mb-0 text-gray-800 text-uppercase">Report For Expense</h1>
         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Downloads Report</a>
     </div>
 
@@ -24,7 +24,7 @@
             <div class="row">
                 <div class="col-10 mx-auto">
 
-                    <form action="{{ route('income.report.get') }}" method="post" >
+                    <form action="{{ route('expense.report.get') }}" method="post" >
                         @csrf
                         <div class="d-sm-flex align-items-center justify-content-center">
                             <div class="form-group mr-2 align-items-center d-flex">
@@ -48,7 +48,7 @@
                 <div class="col-10 mx-auto">
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{ route('income.report.get') }}" method="post" >
+                            <form action="{{ route('expense.report.get') }}" method="post" >
                                 @csrf
                                 <div class="d-sm-flex align-items-center justify-content-center">
 
@@ -56,7 +56,7 @@
                                         <label class="mx-2" class="col-4" for="">Use Category to Search: </label>
                                         <select class="form-control col-6" name="category" id="">
                                             <option selected="selected">Select Category</option>
-                                            @foreach ($incameCategorys as $category)
+                                            @foreach ($expenseCategorys as $category)
                                                 <option value="{{ $category->id }}">{{ $category->title }}</option>
                                             @endforeach
                                         </select>
@@ -71,9 +71,9 @@
                     </div>
                 </div>
             </div>
-            @if (!empty($incomes))
+            @if (!empty($expenses))
             <div>
-                <h1 class="text-uppercase">Total Amount: {{ floatval($incomes->sum('amount'))}}</h1>
+                <h1 class="text-uppercase">Total Amount: {{ floatval($expenses->sum('amount'))}}</h1>
             </div>
             @endif
 
@@ -85,23 +85,23 @@
                             <th>Category</th>
                             <th>Title</th>
                             <th>Amount</th>
-                            <th>Bayer Name</th>
-                            <th>Bayer Phone</th>
+                            <th>Seller Name</th>
+                            <th>Seller Phone</th>
 
                         </tr>
                     </thead>
 
                     <tbody>
-                        @if (!empty($incomes))
-                            @foreach($incomes as $key=>$income)
+                        @if (!empty($expenses))
+                            @foreach($expenses as $key=>$expense)
                             <tr>
 
                                 <td>{{ $key + 1}}</td>
-                                <td >{{$income->income_category ? $income->income_category->title : '' }}</td>
-                                <td >{{$income->income_title ? $income->income_title->title : ''}}</td>
-                                <td >{{$income->amount}}</td>
-                                <td >{{$income->bayer_name}}</td>
-                                <td >{{$income->bayer_phone}}</td>
+                                <td >{{$expense->expense_category ? $expense->expense_category->title : '' }}</td>
+                                <td >{{$expense->expense_title ? $expense->expense_title->title : ''}}</td>
+                                <td >{{$expense->amount}}</td>
+                                <td >{{$expense->seller_name}}</td>
+                                <td >{{$expense->seller_phone}}</td>
 
                             </tr>
                             @endforeach

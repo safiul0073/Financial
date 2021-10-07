@@ -58,7 +58,6 @@
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item {{ request()->routeIs('incomecategory.index') ? 'active' : '' }}">
         <a class="nav-link" href="{{route('incomecategory.index')}}">
-            <i class="fas fa-fw fa-chart-area"></i>
             <span>Income Category</span></a>
         </a>
 
@@ -66,7 +65,6 @@
 
     <li class="nav-item {{ request()->routeIs('incometitle.index') ? 'active' : '' }}">
         <a class="nav-link" href="{{route('incometitle.index')}}">
-            <i class="fas fa-fw fa-cog"></i>
             <span>Income Title</span>
         </a>
 
@@ -75,7 +73,6 @@
     <li class="nav-item {{ request()->routeIs('incame.*') ? 'active' : '' }}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsemain"
             aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-fw fa-cog"></i>
             <span>Income</span>
         </a>
         <div id="collapsemain" class="collapse {{ request()->routeIs('incame.*') ? 'show' : '' }}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -93,7 +90,6 @@
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item {{ request()->routeIs('expenscategory.index') ? 'active' : '' }}">
         <a class="nav-link" href="{{route('expenscategory.index')}}">
-            <i class="fas fa-fw fa-chart-area"></i>
             <span>Expense Category</span></a>
         </a>
 
@@ -101,7 +97,6 @@
 
     <li class="nav-item {{ request()->routeIs('expenstitle.index') ? 'active' : '' }}">
         <a class="nav-link" href="{{route('expenstitle.index')}}">
-            <i class="fas fa-fw fa-cog"></i>
             <span>Expense Title</span>
         </a>
 
@@ -110,7 +105,6 @@
     <li class="nav-item {{ request()->routeIs('expense.*') ? 'active' : '' }}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseexpen"
             aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-fw fa-cog"></i>
             <span>Expense</span>
         </a>
         <div id="collapseexpen" class="collapse {{ request()->routeIs('expense.*') ? 'show' : '' }}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -132,7 +126,6 @@
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item {{ request()->routeIs('income.report.index') ? 'active' : '' }}">
         <a class="nav-link" href="{{route('income.report.index')}}">
-            <i class="fas fa-file-chart-pie"></i>
             <span>Income Report</span></a>
         </a>
 
@@ -140,7 +133,6 @@
 
     <li class="nav-item {{ request()->routeIs('expenses.report.index') ? 'active' : '' }}">
         <a class="nav-link" href="{{route('expenses.report.index')}}">
-            <i class="fas fa-file-chart-pie"></i>
             <span>Expense Report</span>
         </a>
 
@@ -148,7 +140,6 @@
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
-
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>

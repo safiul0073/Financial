@@ -17,6 +17,7 @@ class CreateInvestsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->decimal('amount', 20, 2)->default(0.00);
+            $table->text('comment')->nullable();
             $table->timestamps();
         });
     }

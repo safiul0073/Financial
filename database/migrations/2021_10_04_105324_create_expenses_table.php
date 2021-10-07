@@ -17,7 +17,7 @@ class CreateExpensesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('expense_title_id')->nullable();
             $table->unsignedBigInteger('expense_categorie_id')->nullable();
-            $table->decimal('amount',9,3)->default(0.00);
+            $table->decimal('amount',9,2)->default(0.00);
             $table->string('seller_name')->nullable();
             $table->string('seller_phone')->nullable();
             $table->date('expense_date')->nullable();

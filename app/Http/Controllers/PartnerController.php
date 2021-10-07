@@ -10,7 +10,8 @@ class PartnerController extends Controller
 
     public function index()
     {
-        $partners = User::where('role', 0)->with('invest')->paginate(10);
+        $partners = User::where('role', 0)
+                    ->with('invest')->paginate(10);
 
         return view('content.partner.index', compact('partners'));
     }
@@ -40,9 +41,23 @@ class PartnerController extends Controller
     }
 
 
-    public function show(User $user)
+    public function show($id)
     {
-
+        $user = User::with("invests")->findOrFail($id);
+        $comments = [];
+        foreach ($user->invests as $inv) {
+            $comments[] = $inv->comment;
+        }
+        $partner = [
+            'Perner Name' => $user->name,
+            'Email' => $user->email,
+            'Phone' => $user->phone,
+            'Total Invest Amount' => floatval($user->invests->sum('amount')),
+            'Total Invest' => $user->invests->count('amount'),
+            'Comments' => implode(', ',$comments),
+            'Address' => $user->address,
+        ];
+        return view('content.partner.show',['user' => $partner]);
     }
 
 

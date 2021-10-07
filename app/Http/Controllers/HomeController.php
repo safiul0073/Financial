@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Incame;
 use App\Models\User;
+use App\Services\Calculation;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -10,11 +13,21 @@ use Illuminate\Support\Facades\Hash;
 class HomeController extends Controller
 {
 
-    public function index()
+    public function index(Calculation $calculation)
     {
-
-        return view('content.dashboard.dashboard');
+        return view('content.dashboard.dashboard',
+        ['totalEnvest' => $calculation->TotalInvestAmount(),
+         'totalPartner' => $calculation->TotalPartners(),
+         'totalIncomeAmount' => $calculation->TotalIncomeAmount(),
+         'totalExpensAmount' => $calculation->TotalExpensAmount()
+        ]);
     }
+
+    public function incameChart () {
+        $incomes = Incame::select('amount', 'incame_date')->get();
+        return response()->json([$incomes]);
+    }
+    
     public function registerIndex()
     {
         return view('auth.register');

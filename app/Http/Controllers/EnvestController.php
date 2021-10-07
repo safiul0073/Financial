@@ -15,7 +15,7 @@ class EnvestController extends Controller
      */
     public function index()
     {
-        $partners = User::latest()->get();
+        $partners = User::where('role', 0)->latest()->get();
         $invests = Invest::with('user')->paginate(10);
 
         return view('content.invest.index', compact('partners', 'invests'));
@@ -30,11 +30,11 @@ class EnvestController extends Controller
 
     public function store(Request $request)
     {
-        $invest = $this->validate($request, [
+        $this->validate($request, [
             "amount" => "required",
             'user_id' => "required",
         ]);
-        Invest::create($invest);
+        Invest::create($request->all());
         return redirect()->back()->with('success','Invested successfully.');
     }
 
@@ -55,22 +55,15 @@ class EnvestController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Invest  $invest
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Invest $invest)
     {
 
-        $att = $this->validate($request, [
+        $this->validate($request, [
             "amount" => "required",
             'user_id' => "required",
         ]);
 
-        $invest->update($att);
+        $invest->update($request->all());
         return redirect()->back()->with('success','Invested Updated successfully.');
     }
 

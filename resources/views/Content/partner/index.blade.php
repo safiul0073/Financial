@@ -15,8 +15,7 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Partners Information</h1>
-        <a href="{{route('partner.create')}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-            <i class="far fa-plus fa-sm text-white-100"></i>Add Partner</a>
+        <a href="{{route('partner.create')}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Add Partner</a>
     </div>
 
     {{-- table sectio here.... --}}
@@ -48,20 +47,28 @@
                                 <td >{{ $partner->phone }}</td>
                                 <td >{{ $partner->invest? $partner->invest->amount : ''}}</td>
                                 <td >{{$partner->address}}</td>
-                                <td>
-                                    <a type="button"
-                                        href="{{ route('partner.edit', $partner->id) }}"
-                                        style="color: #1D8348;"
-                                        >
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    <a type="button" style="color:#922B21;" onclick="deleteIncame({{ $partner->id }})">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </a>
-                                    <form id="delete-form-{{ $partner->id }}" action="{{route('partner.destroy',$partner->id)}}" method="POST" style="display: none;">
-                                        @csrf
-                                        @method('DELETE')
-                                    </form>
+                                <td >
+                                    <div class="d-flex">
+                                        <a
+                                            href="{{ route('partner.show', $partner->id) }}"
+                                            class="text-gray-600"
+                                            >
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a  class="mx-1"
+                                            href="{{ route('partner.edit', $partner->id) }}"
+                                            style="color: #1D8348;"
+                                            >
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a type="button" style="color:#922B21;" onclick="deleteIncame({{ $partner->id }})">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </a>
+                                        <form id="delete-form-{{ $partner->id }}" action="{{route('partner.destroy',$partner->id)}}" method="POST" style="display: none;">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
+                                    </div>
                                 </td>
 
                             </tr>

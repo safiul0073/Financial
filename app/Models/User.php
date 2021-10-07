@@ -53,4 +53,8 @@ class User extends Authenticatable
     public function invest(){
         return $this->hasOne(Invest::class);
     }
+
+    public function invests(){
+        return $this->hasMany(Invest::class);
+    }
 }
