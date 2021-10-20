@@ -15,6 +15,9 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Partners Information</h1>
+        <div class="d-flex justify-content-between align-items-center">
+            <input type="text" id="myInput" class="form-control bg-light border-1 small"  placeholder="Search Name.." aria-label="Search" aria-describedby="basic-addon2">
+        </div>
         <a href="{{route('partner.create')}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Add Partner</a>
     </div>
 
@@ -31,13 +34,14 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th>Phone</th>
+                            <th>Date</th>
                             <th>Initila Amount</th>
                             <th>Address</th>
                             <th>Action</th>
                         </tr>
                     </thead>
 
-                    <tbody>
+                    <tbody id="myTable">
                         @foreach($partners as $key=>$partner)
                             <tr>
 
@@ -45,6 +49,7 @@
                                 <td >{{ $partner->name }}</td>
                                 <td >{{ $partner->email }}</td>
                                 <td >{{ $partner->phone }}</td>
+                                <td >{{ $partner->invest? $partner->invest->date : ''}}</td>
                                 <td >{{ $partner->invest? $partner->invest->amount : ''}}</td>
                                 <td >{{$partner->address}}</td>
                                 <td >
@@ -127,6 +132,15 @@
         })
 
 }
+
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
 </script>
 
 @endpush

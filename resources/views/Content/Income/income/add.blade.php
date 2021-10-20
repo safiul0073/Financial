@@ -15,8 +15,7 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Income</h1>
-        <a href="{{route('incame.index')}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                class="fas fa-download fa-sm text-white-50" ></i>Income</a>
+        <a href="{{route('incame.index')}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Income</a>
     </div>
 
     <div class="row">
@@ -63,7 +62,7 @@
 
                         <div class="form-group">
                             <label for="amount">Total Amount</label>
-                            <input type="number" min="0" id="amount" value="{{!empty($incame) ? $incame->amount : 0}}" class="form-control @error('amount') is-invalid @enderror" placeholder="Enter Total amount" name="amount">
+                            <input type="number" step="0.01" min="0" id="amount" value="{{!empty($incame) ? $incame->amount : 0}}" class="form-control @error('amount') is-invalid @enderror" placeholder="Enter Total amount" name="amount">
                             @error('amount')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

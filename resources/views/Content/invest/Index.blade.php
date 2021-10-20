@@ -39,6 +39,19 @@
                         <input step="0.0000" required type="number" id="modalTitle" class="form-control " name="amount" placeholder='Enter Amount...'>
 
                     </div>
+
+                    <div class="form-group">
+                        <label for="date">Invest Date:</label>
+                        <input type="date"
+                                id="date"
+                                class="form-control @error('date') is-invalid @enderror"
+                                name="date">
+                            @error('date')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                    </div>
                     <div class="form-group">
                         <label >Select Partner:</label>
 
@@ -85,6 +98,7 @@
                             <th>ID</th>
                             <th>Pertner Name</th>
                             <th>Invest Amount</th>
+                            <th>Invest Date</th>
                             <th>Comment</th>
                             <th>Action</th>
                         </tr>
@@ -97,6 +111,7 @@
                             <td>{{ $key + 1}}</td>
                             <td >{{$invest->user->name}}</td>
                             <td >{{$invest->amount}}</td>
+                            <td >{{$invest->date}}</td>
                             <td >{{$invest->comment}}</td>
                             <td>
                                 <a type="button" data-toggle="modal" data-target="#incomeAdd{{$invest->id}}"
@@ -135,6 +150,19 @@
                                         </div>
 
                                         <div class="form-group">
+                                            <label for="date">Invest Date:</label>
+                                            <input type="date"
+                                                    id="date" value="{{!empty($invest) ? $invest->date : ''}}"
+                                                    class="form-control @error('date') is-invalid @enderror"
+                                                    name="date">
+                                                @error('date')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                        </div>
+
+                                        <div class="form-group">
                                             <label >Select Pertner:</label>
 
                                             <select class="form-control" name="user_id" id="">
@@ -152,7 +180,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="amount">Comment:</label>
-                                            <textarea type="text" value='' class="form-control @error('comment') is-invalid @enderror" rows="3"  name="comment">{{!empty($incame) ? $incame->comment : ''}}</textarea>
+                                            <textarea type="text" class="form-control @error('comment') is-invalid @enderror" rows="3"  name="comment">{{!empty($invest) ? $invest->comment : ''}}</textarea>
                                             @error('comment')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>

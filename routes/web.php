@@ -34,6 +34,10 @@ Route::post('/user-regiseter', [HomeController::class, 'register'])->name('regis
 Route::group(['middleware' => 'auth'], function(){
     Route::get('/', [HomeController::class, 'index'])->name('dashboard');
     Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
+    Route::get('/setting-index', [HomeController::class, 'settingIndex'])->name('setting.index');
+    Route::get('/cache-clear', [HomeController::class, 'clearCache'])->name('cache.clear');
+    Route::get('/route-clear', [HomeController::class, 'routeClear'])->name('route.clear');
+    Route::get('/view-clear', [HomeController::class, 'clearViews'])->name('view.clear');
     Route::resource('incomecategory', IncomeCategoryController::class);
     Route::resource('incometitle', IncomeTitleController::class);
     Route::resource('expenscategory', ExpensCategoryController::class);
@@ -55,6 +59,10 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('expense-report-get', [ReportController::class, 'expenseReport'])->name('expense.report.get');
     Route::post('income-report-get', [ReportController::class, 'incomeReport'])->name('income.report.get');
 
-    // chart route here...
-    Route::get('incame-chart', [HomeController::class, 'incameChart']);
+    Route::get('exort-excel', [ReportController::class, 'exortIncame'])->name('incame.export');
+
+    // partner Report Section here...
+    Route::get('partner-report-index', [ReportController::class, 'partnerRepotIndex'])->name('report.partner.index');
+    Route::post('get-partner-report', [ReportController::class, 'partnerRepot'])->name('report.partner.get');
+
 });

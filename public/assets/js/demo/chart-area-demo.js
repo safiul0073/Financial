@@ -26,19 +26,11 @@ function number_format(number, decimals, dec_point, thousands_sep) {
     }
     return s.join(dec);
 }
-var url = "{{url('incame-chart')}}";
-// var Years = new Array();
-// var Labels = new Array();
-var Prices = new Array();
-$.get(url, function(response) {
-        response.data.forEach(function(data) {
-            Prices.push(data.amount);
-        });
-    })
-    // Area Chart Example
+
+
 var ctx = document.getElementById("myAreaChart");
 
-var myLineChart = new Chart(ctx, {
+var myAreaChart = new Chart(ctx, {
     type: 'line',
     data: {
         labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
@@ -55,7 +47,7 @@ var myLineChart = new Chart(ctx, {
             pointHoverBorderColor: "rgba(78, 115, 223, 1)",
             pointHitRadius: 10,
             pointBorderWidth: 2,
-            data: Prices,
+            data: [0, 10000, 5000, 15000, 10000, 20000, 15000, 25000, 20000, 30000],
         }],
     },
     options: {

@@ -34,7 +34,11 @@ class PartnerController extends Controller
         ]);
 
         $user = User::create($attributes);
-        $user->invest()->create(['amount' => $request->initial_amount]);
+        $user->invest()->create([
+            'amount' => $request->initial_amount,
+            'date' => $request->date,
+            'comment' => $request->comment
+            ]);
         return redirect()
                ->route('partner.index')
                ->with('success','Partner added successfully.');
@@ -45,8 +49,10 @@ class PartnerController extends Controller
     {
         $user = User::with("invests")->findOrFail($id);
         $comments = [];
+        $date = [];
         foreach ($user->invests as $inv) {
             $comments[] = $inv->comment;
+            $date[] = $inv->date;
         }
         $partner = [
             'Perner Name' => $user->name,
@@ -55,6 +61,7 @@ class PartnerController extends Controller
             'Total Invest Amount' => floatval($user->invests->sum('amount')),
             'Total Invest' => $user->invests->count('amount'),
             'Comments' => implode(', ',$comments),
+            'Invests Date' => implode(', ',$date),
             'Address' => $user->address,
         ];
         return view('content.partner.show',['user' => $partner]);
@@ -72,7 +79,7 @@ class PartnerController extends Controller
 
     public function update(Request $request, $id)
     {
-        $user = $this->validate($request, [
+        $this->validate($request, [
             "name" => "min:2",
             'email' => "email",
             'initial_amount' => 'regex:/^\d+(\.\d{1,2})?$/',
@@ -82,7 +89,13 @@ class PartnerController extends Controller
         ]);
         $user = User::findOrFail($id);
         $user->update($request->all());
-        $user->invest()->update(['amount' => $request->initial_amount]);
+        $invest = $user->invests()->first();
+
+         $invest->update([
+            'amount' => $request->initial_amount,
+            'date' => $request->date,
+            'comment' => $request->comment
+        ]);
         return redirect()
                 ->back()
                 ->with('success','Partner Updated successfully.');
@@ -94,6 +107,8 @@ class PartnerController extends Controller
         $user = User::findOrFail($id);
         $user->invest()->delete();
         $user->delete();
-        return redirect()->back()->with('success','Partner Deleted successfully.');
+        return redirect()
+              ->back()
+              ->with('success','Partner Deleted successfully.');
     }
 }

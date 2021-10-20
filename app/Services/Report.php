@@ -5,6 +5,8 @@ use App\Models\Category;
 use App\Models\Expense;
 use App\Models\ExpenseCategory;
 use App\Models\Incame;
+use App\Models\Invest;
+use App\Models\User;
 use Illuminate\View\View;
 
 class Report {
@@ -45,5 +47,55 @@ class Report {
             return $report;
         }
 
+    }
+    public function partnerIdReport($partnerId) {
+        $report = [];
+
+        if ($partnerId == "All") {
+
+            $report = User::where('role', 0)->with('invests')->get();
+            return $report;
+        }
+        $report = User::where('role', 0)->where('id', $partnerId)->with('invests')->get();
+        return $report;
+
+    }
+    public function partnerDateReport($startDate, $endDate) {
+        $report = [];
+
+        if ($startDate && $endDate) {
+
+            $report = Invest::whereBetween('date', [$startDate,$endDate])->with('user')->get();
+            return $report;
+        }else if ($startDate) {
+
+            $report = Invest::whereDate('date', $startDate)->with('user')->get();
+            return $report;
+        }else{
+
+            $report = Invest::whereDate('date', $endDate)->with('user')->get();
+            return $report;
+        }
+
+    }
+
+    public function calculateProfit ($invetAmount) {
+        if (!$invetAmount) {
+            return 0;
+        }
+
+        $incomeAmount = Incame::sum('amount');
+
+        $expensAmount = Expense::sum('amount');
+
+        $totalInvestAmount = Invest::sum('amount');
+        $profit = $incomeAmount - $expensAmount;
+        $percentOfProfit = $totalInvestAmount / $invetAmount;
+
+        if ($profit > 0) {
+
+           return $profit / $percentOfProfit;
+        }
+        return $profit;
     }
 }

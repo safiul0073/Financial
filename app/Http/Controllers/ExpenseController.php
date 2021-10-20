@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Expense;
 use App\Models\ExpenseCategory;
 use App\Models\ExpenseTitle;
+use App\Models\IncameCategory;
 use Illuminate\Http\Request;
 
 class ExpenseController extends Controller
@@ -20,7 +21,7 @@ class ExpenseController extends Controller
 
     public function create()
     {
-        $categories = ExpenseCategory::latest()->get();
+        $categories = IncameCategory::latest()->get();
         $titles = ExpenseTitle::latest()->get();
 
         return view('content.expens.expens.add', compact('categories','titles'));

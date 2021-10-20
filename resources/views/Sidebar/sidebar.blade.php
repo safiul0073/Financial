@@ -137,6 +137,12 @@
         </a>
 
     </li>
+    <li class="nav-item {{ request()->routeIs('report.partner.*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{route('report.partner.index')}}">
+            <span>Partner Report</span>
+        </a>
+
+    </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
