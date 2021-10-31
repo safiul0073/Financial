@@ -14,10 +14,16 @@
     <!-- Page level custom scripts -->
     <script src="{{ asset('assets') }}/js/demo/chart-area-demo.js"></script>
     <script src="{{ asset('assets') }}/js/demo/chart-pie-demo.js"></script>
+<<<<<<< HEAD
 
     <!-- select2 for search select option -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="{{ asset('assets') }}/vendor/datatables/jquery.dataTables.min.js"></script>
+=======
+    
+    <!-- select2 for search select option -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+>>>>>>> 85ff2ffd93e04f59cbdcdd94069726d68110ab12
     <script type="text/javascript">
         $.ajaxSetup({
             headers: {

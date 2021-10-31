@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Expense;
 use App\Models\Category;
 use App\Models\ExpenseTitle;
+use App\Models\IncameCategory;
 use Illuminate\Http\Request;
 
 class ExpenseController extends Controller

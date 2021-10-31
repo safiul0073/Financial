@@ -53,10 +53,17 @@ class Report {
 
         if ($partnerId == "All") {
 
+<<<<<<< HEAD
             $report = User::with('invests')->get();
             return $report;
         }
         $report = User::where('id', $partnerId)->with('invests')->get();
+=======
+            $report = User::where('role', 0)->with('invests')->get();
+            return $report;
+        }
+        $report = User::where('role', 0)->where('id', $partnerId)->with('invests')->get();
+>>>>>>> 85ff2ffd93e04f59cbdcdd94069726d68110ab12
         return $report;
 
     }

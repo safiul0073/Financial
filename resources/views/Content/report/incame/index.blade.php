@@ -59,7 +59,11 @@
                                         <label class="mx-2" class="col-4" for="">Use Category to Search: </label>
                                         <select class="form-control col-6" name="category" id="">
                                             {{-- <option selected="selected">Select Category</option> --}}
+<<<<<<< HEAD
                                             @foreach ($categorys as $incameCategory)
+=======
+                                            @foreach ($incameCategorys as $incameCategory)
+>>>>>>> 85ff2ffd93e04f59cbdcdd94069726d68110ab12
                                                 @if (!empty($category) && $category == $incameCategory->id)
                                                     <option selected="selected" value="{{ $incameCategory->id }}">{{ $incameCategory->title }}</option>
                                                 @else
