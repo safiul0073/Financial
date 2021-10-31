@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateIncameCategoriesTable extends Migration
+class CreateProfitRequestsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateIncameCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('incame_categories', function (Blueprint $table) {
+        Schema::create('profit_requests', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable();
+            $table->foreignId('user_id')->constrained();
+            $table->unsignedDouble('amount',15,2)->default(0.00);
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ class CreateIncameCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('incame_categories');
+        Schema::dropIfExists('profit_requests');
     }
 }

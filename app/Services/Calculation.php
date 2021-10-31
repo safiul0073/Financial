@@ -14,7 +14,7 @@ class Calculation {
         return $amount;
     }
     public function TotalPartners() {
-        $partner = User::where('role', 0)->count();
+        $partner = User::count('id');
         return $partner;
     }
     public function TotalIncomeAmount() {

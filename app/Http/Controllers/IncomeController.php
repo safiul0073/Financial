@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Incame;
-use App\Models\IncameCategory;
+use App\Models\Category;
 use App\Models\IncameTitle;
 use Illuminate\Http\Request;
 
@@ -12,7 +12,7 @@ class IncomeController extends Controller
 
     public function index()
     {
-        $incams = Incame::with('income_category', 'income_title')->paginate(10);
+        $incams = Incame::with('category', 'income_title')->latest()->get();
 
         return view('content.income.income.index', compact('incams'));
     }
@@ -20,7 +20,7 @@ class IncomeController extends Controller
 
     public function create()
     {
-        $categories = IncameCategory::latest()->get();
+        $categories = Category::latest()->get();
         $titles = IncameTitle::latest()->get();
 
         return view('content.income.income.add', compact('categories','titles'));
@@ -31,11 +31,11 @@ class IncomeController extends Controller
     {
         $incameTitles = null;
         $value = $request->get('value');
-        $incameTitles=IncameTitle::where('incame_categorie_id', $value)->get();
+        $incameTitles=IncameTitle::where('categorie_id', $value)->get();
 
 
         if (count($incameTitles) > 0) {
-            
+
             $output = '';
 
             foreach($incameTitles as $row)
@@ -60,7 +60,7 @@ class IncomeController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            "incame_categorie_id" => "required",
+            "categorie_id" => "required",
             'amount' => "required",
             'incame_date' => 'required'
         ]);
@@ -78,7 +78,7 @@ class IncomeController extends Controller
 
     public function edit(Incame $incame)
     {
-        $categories = IncameCategory::latest()->get();
+        $categories = Category::latest()->get();
         $titles = IncameTitle::latest()->get();
 
         return view('Content.Income.Income.add', compact('incame', 'categories', 'titles'));
@@ -88,7 +88,7 @@ class IncomeController extends Controller
     public function update(Request $request, Incame $incame)
     {
         $this->validate($request, [
-            "incame_categorie_id" => "required",
+            "categorie_id" => "required",
             'amount' => "required",
             'incame_date' => 'required'
         ]);

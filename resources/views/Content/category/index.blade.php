@@ -26,13 +26,13 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                   <h5 class="modal-title" id="exampleModalLabel">Income Category</h5>
+                   <h5 class="modal-title" id="exampleModalLabel">Category</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                  <form action="{{route('incomecategory.store')}}" method='POST'>
+                  <form action="{{route('category.store')}}" method='POST'>
                         @csrf
                     <div class="form-group">
                         <label for="modalTitle">Title:</label>
@@ -83,7 +83,7 @@
                                 <a type="button" style="color:#922B21;" onclick="deleteCategory({{ $category->id }})">
                                     <i class="fas fa-trash-alt"></i>
                                 </a>
-                                <form id="delete-form-{{ $category->id }}" action="{{route('incomecategory.destroy',$category->id)}}" method="POST" style="display: none;">
+                                <form id="delete-form-{{ $category->id }}" action="{{route('category.destroy',$category->id)}}" method="POST" style="display: none;">
                                     @csrf
                                     @method('DELETE')
                                 </form>
@@ -102,7 +102,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                    <form action="{{route('incomecategory.update', $category->id)}}" method='POST'>
+                                    <form action="{{route('category.update', $category->id)}}" method='POST'>
                                             @csrf
                                             @method('PUT')
                                         <div class="form-group">

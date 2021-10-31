@@ -15,7 +15,7 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800 text-uppercase">Report For Expense</h1>
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Downloads Report</a>
+        <a onclick="myApp.printTable()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Print Report</a>
     </div>
 
 
@@ -56,7 +56,7 @@
                                         <label class="mx-2" class="col-4" for="">Use Category to Search: </label>
                                         <select class="form-control col-6" name="category" id="">
                                             <option selected="selected">Select Category</option>
-                                            @foreach ($expenseCategorys as $category)
+                                            @foreach ($categorys as $category)
                                                 <option value="{{ $category->id }}">{{ $category->title }}</option>
                                             @endforeach
                                         </select>
@@ -78,16 +78,13 @@
             @endif
 
             <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered" id="dvContents" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>Category</th>
                             <th>Title</th>
                             <th>Amount</th>
-                            <th>Seller Name</th>
-                            <th>Seller Phone</th>
-
                         </tr>
                     </thead>
 
@@ -97,12 +94,9 @@
                             <tr>
 
                                 <td>{{ $key + 1}}</td>
-                                <td >{{$expense->expense_category ? $expense->expense_category->title : '' }}</td>
+                                <td >{{$expense->category ? $expense->category->title : '' }}</td>
                                 <td >{{$expense->expense_title ? $expense->expense_title->title : ''}}</td>
                                 <td >{{$expense->amount}}</td>
-                                <td >{{$expense->seller_name}}</td>
-                                <td >{{$expense->seller_phone}}</td>
-
                             </tr>
                             @endforeach
                         @endif
@@ -115,7 +109,16 @@
 </div>
 @endsection
 @push('js')
-
+    <script>
+    var myApp = new function () {
+        this.printTable = function () {
+            var tab = document.getElementById('dvContents');
+            var win = window.open('', '', 'height=720,width=1024');
+            win.document.write(tab.outerHTML);
+            win.document.close();
+            win.print();
+        }}
+    </script>
 @endpush
 
 

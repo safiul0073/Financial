@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Incame;
-use App\Models\IncameCategory;
+use App\Models\Category;
 use App\Models\IncameTitle;
 use Illuminate\Http\Request;
 
@@ -16,8 +16,8 @@ class IncomeTitleController extends Controller
      */
     public function index()
     {
-        $titles = IncameTitle::with('income_category')->paginate(10);
-        $categorys = IncameCategory::latest()->get();
+        $titles = IncameTitle::with('category')->latest()->get();
+        $categorys = Category::latest()->get();
 
         return view('content.income.title.index',compact('titles', 'categorys'));
     }
@@ -43,6 +43,8 @@ class IncomeTitleController extends Controller
         $this->validate($request, [
             "title" => "required"
         ]);
+
+        
         IncameTitle::create($request->all());
         return redirect()->back()->with('success','Incame Title added successfully.');
     }

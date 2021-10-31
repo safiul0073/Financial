@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ExpenseCategory;
+use App\Models\Category;
 use App\Models\ExpenseTitle;
 use Illuminate\Http\Request;
 
@@ -15,8 +15,8 @@ class ExpensTitleController extends Controller
      */
     public function index()
     {
-        $expens = ExpenseTitle::with('expense_category')->paginate(10);
-        $expensCategorys = ExpenseCategory::latest()->get();
+        $expens = ExpenseTitle::with('category')->paginate(10);
+        $expensCategorys = Category::latest()->get();
         return view('content.expens.title.index',compact('expens', 'expensCategorys'));
     }
 
@@ -73,6 +73,8 @@ class ExpensTitleController extends Controller
         $this->validate($request, [
             "title" => "required"
         ]);
+
+        // dd($request->all());
         ExpenseTitle::findOrFail($id)->update($request->all());
         return redirect()->back()->with('success','Expens Title Updated successfully.');
     }

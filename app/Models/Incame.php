@@ -11,8 +11,8 @@ class Incame extends Model
 
     protected $guarded = [];
 
-    public function income_category(){
-        return $this->belongsTo(IncameCategory::class, 'incame_categorie_id', 'id');
+    public function category(){
+        return $this->belongsTo(Category::class, 'categorie_id', 'id');
     }
 
     public function income_title(){

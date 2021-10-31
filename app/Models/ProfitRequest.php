@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ExpenseCategory extends Model
+class ProfitRequest extends Model
 {
     use HasFactory;
+
     protected $guarded = [];
 
-    public function expense_title(){
-        return $this->hasMany(ExpenseTitle::class,'expense_title_id',"id");
+    public function user () {
+        return $this->belongsTo(User::class);
     }
 }

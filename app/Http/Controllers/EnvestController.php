@@ -15,7 +15,7 @@ class EnvestController extends Controller
      */
     public function index()
     {
-        $partners = User::where('role', 0)->latest()->get();
+        $partners = User::latest()->get();
         $invests = Invest::with('user')->paginate(10);
 
         return view('content.invest.index', compact('partners', 'invests'));
@@ -33,6 +33,7 @@ class EnvestController extends Controller
         $this->validate($request, [
             "amount" => "required",
             'user_id' => "required",
+            'date' => "required",
         ]);
         Invest::create($request->all());
         return redirect()->back()->with('success','Invested successfully.');
@@ -44,12 +45,6 @@ class EnvestController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Invest  $invest
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Invest $invest)
     {
         //
@@ -61,6 +56,7 @@ class EnvestController extends Controller
         $this->validate($request, [
             "amount" => "required",
             'user_id' => "required",
+            'date' => "required",
         ]);
 
         $invest->update($request->all());

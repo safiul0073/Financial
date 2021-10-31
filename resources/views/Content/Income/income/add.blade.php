@@ -15,8 +15,7 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Income</h1>
-        <a href="{{route('incame.index')}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                class="fas fa-download fa-sm text-white-50" ></i>Income</a>
+        <a href="{{route('incame.index')}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Income</a>
     </div>
 
     <div class="row">
@@ -30,18 +29,18 @@
 
                         @csrf
                         <div class="form-group">
-                            <label for="ItemCategory">Incame Category:</label>
-                            <select class="form-control @error('incame_categorie_id') is-invalid @enderror"  name="incame_categorie_id" data-dependent="income_title" id="ItemCategory">
-                                <option selected="selected">Select Income Category</option>
+                            <label for="ItemCategory">Category:</label>
+                            <select class="form-control @error('categorie_id') is-invalid @enderror"  name="categorie_id" data-dependent="income_title" id="ItemCategory">
+                                <option selected="selected">Select Category</option>
                                 @foreach ($categories as $category)
-                                    @if (!empty($incame->income_category) && $incame->incame_categorie_id == $category->id)
+                                    @if (!empty($incame->category) && $incame->categorie_id == $category->id)
                                         <option selected="selected" value="{{$category->id}}">{{$category->title}}</option>
                                     @else
                                         <option value="{{$category->id}}">{{$category->title}}</option>
                                     @endif
                                 @endforeach
                             </select>
-                            @error('incame_categorie_id')
+                            @error('categorie_id')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -63,7 +62,7 @@
 
                         <div class="form-group">
                             <label for="amount">Total Amount</label>
-                            <input type="number" min="0" id="amount" value="{{!empty($incame) ? $incame->amount : 0}}" class="form-control @error('amount') is-invalid @enderror" placeholder="Enter Total amount" name="amount">
+                            <input type="number" step="0.01" min="0" id="amount" value="{{!empty($incame) ? $incame->amount : 0}}" class="form-control @error('amount') is-invalid @enderror" placeholder="Enter Total amount" name="amount">
                             @error('amount')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -79,24 +78,7 @@
                                 </span>
                             @enderror
                         </div>
-                        <div class="form-group">
-                            <label for="amount">Bayer Name:</label>
-                            <input type="text" value="{{!empty($incame) ? $incame->bayer_name : ''}}" class="form-control @error('bayer_name') is-invalid @enderror" placeholder="Enter Bayer name..."  name="bayer_name">
-                            @error('bayer_name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="amount">Bayer Phone:</label>
-                            <input type="text" value="{{!empty($incame) ? $incame->bayer_phone : ''}}" class="form-control @error('bayer_phone') is-invalid @enderror" placeholder="Enter Bayer phone..."  name="bayer_phone">
-                            @error('bayer_phone')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
+
                         <div class="form-group">
                             <label for="amount">Dascription:</label>
                             <textarea type="text" value='' class="form-control @error('bayer_phone') is-invalid @enderror" rows="3"  name="description">{{!empty($incame) ? $incame->description : ''}}</textarea>

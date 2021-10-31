@@ -1,11 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\ExpenseCategory;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
-class ExpensCategoryController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +13,9 @@ class ExpensCategoryController extends Controller
      */
     public function index()
     {
-        $expens = ExpenseCategory::paginate(10);
+        $categories = Category::paginate(10);
 
-        return view('content.expens.category.index',compact('expens'));
+        return view('content.category.index',compact('categories'));
     }
 
     /**
@@ -36,14 +35,15 @@ class ExpensCategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+     {
         $this->validate($request, [
             "title" => "required"
         ]);
-        ExpenseCategory::create([
+        Category::create([
             'title' => $request->title
         ]);
-        return redirect()->back()->with('success','Expens Category added successfully.');
+        return redirect()->back()->with('success','Incame Category added successfully.');
+
     }
 
     /**
@@ -65,37 +65,25 @@ class ExpensCategoryController extends Controller
      */
     public function edit($id)
     {
-        $expen = ExpenseCategory::find($id);
-        return redirect()->route('expenscategory.index');
+        $category = Category::find($id);
+        return redirect()->route('incomecategory.index');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $this->validate($request, [
             "title" => "required"
         ]);
-         ExpenseCategory::findOrFail($id)->update([
+         Category::findOrFail($id)->update([
             'title' => $request->title
         ]);
-        return redirect()->back()->with('success','Expens Category Updated successfully.');
+        return redirect()->back()->with('success','Incame Category Updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
-        ExpenseCategory::find($id)->delete();
-        return redirect()->back()->with('success','Expens Category Deleted successfully.');
+        Category::find($id)->delete();
+        return redirect()->back()->with('success','Incame Category Deleted successfully.');
     }
 }

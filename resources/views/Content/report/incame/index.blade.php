@@ -15,7 +15,10 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800 text-uppercase">Report For Income</h1>
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Downloads Report</a>
+
+            <button onclick="myApp.printTable()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Print Report</button>
+
+
     </div>
 
 
@@ -29,14 +32,14 @@
                         <div class="d-sm-flex align-items-center justify-content-center">
                             <div class="form-group mr-2 align-items-center d-flex">
                                 <label class="mx-2" for="selectDate">from: </label>
-                                <input type="date" name="start_date" class="form-control">
+                                <input type="date" name="start_date" value="{{ !empty($start_date) ? $start_date : "" }}" class="form-control">
                             </div>
                             <div class="form-group mr-5 align-items-center d-flex">
                                 <label class="mx-2" for="selectDate">to: </label>
-                                <input type="date" name="end_date" class="form-control">
+                                <input type="date" value="{{ !empty($end_date) ? $end_date : "" }}" name="end_date" class="form-control">
                             </div>
                             <div clase="align-items-center justify-items-center d-flex">
-                                <button type="submit" class="btn btn-primary mb-3">Search</button>
+                                <button class="btn btn-primary mb-3">Search</button>
                             </div>
 
                         </div>
@@ -55,9 +58,14 @@
                                     <div class="form-group mr-5 align-items-center d-flex col-7">
                                         <label class="mx-2" class="col-4" for="">Use Category to Search: </label>
                                         <select class="form-control col-6" name="category" id="">
-                                            <option selected="selected">Select Category</option>
-                                            @foreach ($incameCategorys as $category)
-                                                <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                            {{-- <option selected="selected">Select Category</option> --}}
+                                            @foreach ($categorys as $incameCategory)
+                                                @if (!empty($category) && $category == $incameCategory->id)
+                                                    <option selected="selected" value="{{ $incameCategory->id }}">{{ $incameCategory->title }}</option>
+                                                @else
+
+                                                @endif
+                                                <option value="{{ $incameCategory->id }}">{{ $incameCategory->title }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -78,16 +86,13 @@
             @endif
 
             <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered" id="dvContents" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>Category</th>
                             <th>Title</th>
                             <th>Amount</th>
-                            <th>Bayer Name</th>
-                            <th>Bayer Phone</th>
-
                         </tr>
                     </thead>
 
@@ -97,11 +102,9 @@
                             <tr>
 
                                 <td>{{ $key + 1}}</td>
-                                <td >{{$income->income_category ? $income->income_category->title : '' }}</td>
+                                <td >{{$income->category ? $income->category->title : '' }}</td>
                                 <td >{{$income->income_title ? $income->income_title->title : ''}}</td>
                                 <td >{{$income->amount}}</td>
-                                <td >{{$income->bayer_name}}</td>
-                                <td >{{$income->bayer_phone}}</td>
 
                             </tr>
                             @endforeach
@@ -115,7 +118,16 @@
 </div>
 @endsection
 @push('js')
-
+    <script>
+    var myApp = new function () {
+        this.printTable = function () {
+            var tab = document.getElementById('dvContents');
+            var win = window.open('', '', 'height=720,width=1024');
+            win.document.write(tab.outerHTML);
+            win.document.close();
+            win.print();
+        }}
+    </script>
 @endpush
 
 

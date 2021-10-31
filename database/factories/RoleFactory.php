@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\IncameCategory;
+use App\Models\Role;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class IncameCategoryFactory extends Factory
+class RoleFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = IncameCategory::class;
+    protected $model = Role::class;
 
     /**
      * Define the model's default state.
@@ -22,7 +22,7 @@ class IncameCategoryFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->title,
+            'name' => $this->faker->randomElement(['Super User', 'Admin', 'User'])
         ];
     }
 }

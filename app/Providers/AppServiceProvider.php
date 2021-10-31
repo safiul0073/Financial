@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\View\Composer\ExpenseCategoryComposer;
 use App\View\Composer\IncomeCategoryComposer;
+use App\View\Composer\PartnerComposer;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -28,5 +29,6 @@ class AppServiceProvider extends ServiceProvider
     {
         View::composer(['content.report.expense.index'], ExpenseCategoryComposer::class);
         View::composer(['content.report.incame.index'], IncomeCategoryComposer::class);
+        View::composer(['content.report.partner.index'], PartnerComposer::class);
     }
 }

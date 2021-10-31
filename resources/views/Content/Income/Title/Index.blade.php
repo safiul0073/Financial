@@ -40,10 +40,10 @@
 
                     </div>
                     <div class="form-group">
-                        <label >Income Category:</label>
+                        <label >Category:</label>
 
-                        <select class="form-control" name="incame_categorie_id" id="">
-                            <option selected="selected">Select Income Category</option>
+                        <select class="form-control" name="categorie_id" id="">
+                            <option selected="selected">Select Category</option>
                             @foreach ($categorys as $category)
                                 <option value="{{$category->id}}">{{$category->title}}</option>
                             @endforeach
@@ -75,7 +75,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Title</th>
-                            <th>Income Category</th>
+                            <th>Category</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -86,7 +86,7 @@
 
                             <td>{{ $key + 1}}</td>
                             <td >{{$title->title}}</td>
-                            <td >{{$title->income_category? $title->income_category->title : ''}}</td>
+                            <td >{{$title->category? $title->category->title : ''}}</td>
                             <td>
                                 <a type="button" data-toggle="modal" data-target="#incomeAdd{{$title->id}}"
                                     style="color: #1D8348;"
@@ -124,12 +124,12 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label >Income Category:</label>
+                                            <label >Category:</label>
 
-                                            <select class="form-control" name="incame_categorie_id" id="">
-                                                <option selected="selected">Select Income Category</option>
+                                            <select class="form-control" name="categorie_id" id="">
+                                                <option selected="selected">Select Category</option>
                                                 @foreach ($categorys as $category)
-                                                    @if (!empty($title->income_category) && $title->incame_categorie_id == $category->id)
+                                                    @if (!empty($title->category) && $title->categorie_id == $category->id)
                                                         <option selected="selected" value="{{$category->id}}">{{$category->title}}</option>
                                                     @else
                                                     <option value="{{$category->id}}">{{$category->title}}</option>
@@ -156,9 +156,9 @@
                     </tbody>
                 </table>
 
-                <div class="d-flex justify-content-center">
+                {{-- <div class="d-flex justify-content-center">
                     {!! $titles->links() !!}
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

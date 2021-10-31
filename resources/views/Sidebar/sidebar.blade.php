@@ -15,6 +15,11 @@
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
+    <li class="nav-item {{ request()->routeIs('request.*') ? 'active' : '' }}">
+        <a class="nav-link " href="{{ route('request.index') }}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Request</span></a>
+    </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider">
@@ -52,16 +57,39 @@
     <hr class="sidebar-divider">
 
     <div class="sidebar-heading">
+        Category
+    </div>
+    <li class="nav-item {{ request()->routeIs('category.index') ? 'active' : '' }}">
+        <a class="nav-link " href="{{route('category.index')}}">
+            <i class="fas fa-money-check-alt"></i>
+            <span>Category</span></a>
+        </a>
+
+    </li>
+    {{-- <hr class="sidebar-divider">
+    <div class="sidebar-heading">
+        Category
+    </div>
+    <li class="nav-item {{ request()->routeIs('category.index') ? 'active' : '' }}">
+        <a class="nav-link " href="{{route('category.index')}}">
+            <i class="fas fa-money-check-alt"></i>
+            <span>Activity</span></a>
+        </a>
+
+    </li> --}}
+    <hr class="sidebar-divider">
+
+    <div class="sidebar-heading">
         Income
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item {{ request()->routeIs('incomecategory.index') ? 'active' : '' }}">
+    {{-- <li class="nav-item {{ request()->routeIs('incomecategory.index') ? 'active' : '' }}">
         <a class="nav-link" href="{{route('incomecategory.index')}}">
             <span>Income Category</span></a>
         </a>
 
-    </li>
+    </li> --}}
 
     <li class="nav-item {{ request()->routeIs('incometitle.index') ? 'active' : '' }}">
         <a class="nav-link" href="{{route('incometitle.index')}}">
@@ -88,12 +116,12 @@
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item {{ request()->routeIs('expenscategory.index') ? 'active' : '' }}">
+    {{-- <li class="nav-item {{ request()->routeIs('expenscategory.index') ? 'active' : '' }}">
         <a class="nav-link" href="{{route('expenscategory.index')}}">
             <span>Expense Category</span></a>
         </a>
 
-    </li>
+    </li> --}}
 
     <li class="nav-item {{ request()->routeIs('expenstitle.index') ? 'active' : '' }}">
         <a class="nav-link" href="{{route('expenstitle.index')}}">
@@ -134,6 +162,12 @@
     <li class="nav-item {{ request()->routeIs('expenses.report.index') ? 'active' : '' }}">
         <a class="nav-link" href="{{route('expenses.report.index')}}">
             <span>Expense Report</span>
+        </a>
+
+    </li>
+    <li class="nav-item {{ request()->routeIs('report.partner.*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{route('report.partner.index')}}">
+            <span>Partner Report</span>
         </a>
 
     </li>

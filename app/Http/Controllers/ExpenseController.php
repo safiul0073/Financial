@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Expense;
-use App\Models\ExpenseCategory;
+use App\Models\Category;
 use App\Models\ExpenseTitle;
 use Illuminate\Http\Request;
 
@@ -11,7 +11,7 @@ class ExpenseController extends Controller
 {
     public function index()
     {
-        $incams = Expense::with('expense_category', 'expense_title')
+        $incams = Expense::with('category', 'expense_title')
                            ->paginate(10);
 
         return view('content.expens.expens.index', compact('incams'));
@@ -20,7 +20,7 @@ class ExpenseController extends Controller
 
     public function create()
     {
-        $categories = ExpenseCategory::latest()->get();
+        $categories = Category::latest()->get();
         $titles = ExpenseTitle::latest()->get();
 
         return view('content.expens.expens.add', compact('categories','titles'));
@@ -31,7 +31,7 @@ class ExpenseController extends Controller
     {
 
         $value = $request->get('value');
-        $incameTitles=ExpenseTitle::where('expense_categorie_id', $value)->get();
+        $incameTitles=ExpenseTitle::where('categorie_id', $value)->get();
 
 
         if (count($incameTitles) > 0) {
@@ -59,7 +59,7 @@ class ExpenseController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            "expense_categorie_id" => "required",
+            "categorie_id" => "required",
             'amount' => "required",
             'expense_date' => 'required'
         ]);
@@ -79,7 +79,7 @@ class ExpenseController extends Controller
 
     public function edit(Expense $expense)
     {
-        $categories = ExpenseCategory::latest()->get();
+        $categories = Category::latest()->get();
         $titles = ExpenseTitle::latest()->get();
 
         return view('Content.Expens.Expens.add', compact('expense', 'categories', 'titles'));
@@ -89,7 +89,7 @@ class ExpenseController extends Controller
     public function update(Request $request, Expense $expense)
     {
         $this->validate($request, [
-            "expense_categorie_id" => "required",
+            "categorie_id" => "required",
             'amount' => "required",
             'expense_date' => 'required'
         ]);

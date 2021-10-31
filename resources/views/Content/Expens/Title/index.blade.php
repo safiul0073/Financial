@@ -15,8 +15,7 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Expense Title</h1>
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#expenAdd"><i
-                class="fas fa-download fa-sm text-white-50" ></i> Add Expense Title</a>
+        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#expenAdd">Add Expense Title</a>
     </div>
 
     {{--  model for title --}}
@@ -38,10 +37,10 @@
                         <input required type="text" id="modalTitle" class="form-control " name="title" placeholder='Enter Expens Title...'>
                     </div>
                     <div class="form-group">
-                        <label >Income Category:</label>
+                        <label >Category:</label>
 
-                        <select class="form-control" name="expense_categorie_id" id="">
-                            <option selected="selected">Select Expense Category</option>
+                        <select class="form-control" name="categorie_id" id="">
+                            <option selected="selected">Select Category</option>
 
                             @foreach ($expensCategorys as $category)
 
@@ -86,7 +85,7 @@
 
                             <td>{{ $key + 1}}</td>
                             <td >{{$expen->title}}</td>
-                            <td >{{$expen->expense_category? $expen->expense_category->title : ''}}</td>
+                            <td >{{$expen->category? $expen->category->title : ''}}</td>
                             <td>
                                 <a type="button" data-toggle="modal" data-target="#expenAdd{{$expen->id}}"
                                     style="color: #1D8348;"
@@ -124,13 +123,13 @@
                                             <input type="text" id="modalTitle" class="form-control" value="{{!empty($expen) ? $expen->title : ''}}" name="title" placeholder='Enter Expens Title...'>
                                         </div>
                                         <div class="form-group">
-                                            <label >Income Category:</label>
+                                            <label >Category:</label>
 
-                                            <select class="form-control" name="expense_categorie_id" id="">
-                                                <option selected="selected">Select Expense Category</option>
+                                            <select class="form-control" name="categorie_id" id="">
+                                                <option selected="selected">Select Category</option>
 
                                                 @foreach ($expensCategorys as $category)
-                                                        @if (!empty($expen->expense_category) && $expen->expense_categorie_id == $category->id)
+                                                        @if (!empty($expen->category) && $expen->categorie_id == $category->id)
                                                             <option selected="selected" value="{{$category->id}}">{{$category->title}}</option>
                                                         @else
                                                         <option value="{{$category->id}}">{{$category->title}}</option>
@@ -154,9 +153,9 @@
 
                     </tbody>
                 </table>
-                <div class="d-flex justify-content-center">
+                {{-- <div class="d-flex justify-content-center">
                     {!! $expens->links() !!}
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

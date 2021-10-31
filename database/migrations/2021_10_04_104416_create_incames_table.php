@@ -16,7 +16,7 @@ class CreateIncamesTable extends Migration
         Schema::create('incames', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('incame_title_id')->nullable();
-            $table->unsignedBigInteger('incame_categorie_id')->nullable();
+            $table->unsignedBigInteger('categorie_id')->nullable();
             $table->decimal('amount',20,2)->default(0.00);
             $table->string('bayer_name')->nullable();
             $table->string('bayer_phone')->nullable();

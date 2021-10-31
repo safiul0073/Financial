@@ -15,8 +15,7 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Expense</h1>
-        <a href="{{route('expense.index')}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                class="fas fa-download fa-sm text-white-50" ></i>Expense</a>
+        <a href="{{route('expense.index')}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Expense</a>
     </div>
 
     <div class="row">
@@ -30,18 +29,18 @@
 
                         @csrf
                         <div class="form-group">
-                            <label for="ItemCategory">Expense Category:</label>
-                            <select class="form-control @error('expense_categorie_id') is-invalid @enderror"  name="expense_categorie_id" data-dependent="income_title" id="ItemCategory">
-                                <option selected="selected">Select Expense Category</option>
+                            <label for="ItemCategory">Category:</label>
+                            <select class="form-control @error('categorie_id') is-invalid @enderror"  name="categorie_id" data-dependent="income_title" id="ItemCategory">
+                                <option selected="selected">Select Category</option>
                                 @foreach ($categories as $category)
-                                    @if (!empty($expense->expense_category) && $expense->expense_categorie_id == $category->id)
+                                    @if (!empty($expense->category) && $expense->categorie_id == $category->id)
                                         <option selected="selected" value="{{$category->id}}">{{$category->title}}</option>
                                     @else
                                         <option value="{{$category->id}}">{{$category->title}}</option>
                                     @endif
                                 @endforeach
                             </select>
-                            @error('incame_categorie_id')
+                            @error('categorie_id')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -82,31 +81,7 @@
                                     </span>
                                 @enderror
                         </div>
-                        <div class="form-group">
-                            <label for="amount">Bayer Name:</label>
-                            <input type="text" value="{{!empty($expense) ? $expense->seller_name : ''}}"
-                                   class="form-control @error('seller_name') is-invalid @enderror"
-                                   placeholder="Enter Seller name..."
-                                   name="seller_name">
-                                    @error('seller_name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="amount">Bayer Phone:</label>
-                            <input type="text"
-                                   value="{{!empty($expense) ? $expense->seller_phone : ''}}"
-                                   class="form-control @error('bayer_phone') is-invalid @enderror"
-                                   placeholder="Enter Seller phone..."
-                                   name="seller_phone">
-                                    @error('bayer_phone')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                        </div>
+
                         <div class="form-group">
                             <label for="amount">Dascription:</label>
                             <textarea type="text" value='' class="form-control @error('description') is-invalid @enderror" rows="3"  name="description">{{!empty($expense) ? $expense->description : ''}}</textarea>

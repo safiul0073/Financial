@@ -15,8 +15,7 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Expense</h1>
-        <a href="{{route('expense.create')}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                class="fas fa-download fa-sm text-white-50" ></i> Add Expense</a>
+        <a href="{{route('expense.create')}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Add Expense</a>
     </div>
 
     {{-- table sectio here.... --}}
@@ -32,8 +31,7 @@
                             <th>Category</th>
                             <th>Title</th>
                             <th>Amount</th>
-                            <th>Seller Name</th>
-                            <th>Seller Phone</th>
+                            <th>Date</th>
                             <th>Description</th>
                             <th>Action</th>
                         </tr>
@@ -44,11 +42,10 @@
                             <tr>
 
                                 <td>{{ $key + 1}}</td>
-                                <td >{{$incame->expense_category ? $incame->expense_category->title : '' }}</td>
+                                <td >{{$incame->category ? $incame->category->title : '' }}</td>
                                 <td >{{$incame->expense_title ? $incame->expense_title->title : ''}}</td>
                                 <td >{{$incame->amount}}</td>
-                                <td >{{$incame->seller_name}}</td>
-                                <td >{{$incame->seller_phone}}</td>
+                                <td >{{$incame->expense_date}}</td>
                                 <td >{{$incame->description}}</td>
                                 <td>
                                     <a type="button"
@@ -68,9 +65,7 @@
 
                             </tr>
 
-
                             @endforeach
-
 
                     </tbody>
                 </table>

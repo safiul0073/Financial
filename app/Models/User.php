@@ -23,8 +23,9 @@ class User extends Authenticatable
         'email',
         'password',
         'phone',
+        'avater',
         'address',
-        'role'
+        'role_id'
     ];
 
     /**
@@ -46,10 +47,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function setPasswordAttribute($password) {
-        return $this->attributes['password'] = Hash::make($password);
-    }
-
     public function invest(){
         return $this->hasOne(Invest::class);
     }
@@ -57,4 +54,12 @@ class User extends Authenticatable
     public function invests(){
         return $this->hasMany(Invest::class);
     }
+
+    public function isAdmin (){
+        return $this->role_id == 1;
+    }
+    public function isSuperAdmin (){
+        return $this->role_id == 0;
+    }
+
 }

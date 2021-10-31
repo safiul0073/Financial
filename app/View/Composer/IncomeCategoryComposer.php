@@ -1,13 +1,13 @@
 <?php
 namespace App\View\Composer;
 
-use App\Models\IncameCategory;
+use App\Models\Category;
 use Illuminate\View\View;
 
 class IncomeCategoryComposer {
 
     public function compose(View $view) {
 
-        $view->with('incameCategorys', IncameCategory::all());
+        $view->with('categorys', Category::all());
     }
 }

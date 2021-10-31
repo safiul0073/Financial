@@ -68,10 +68,22 @@
                                 </span>
                             @enderror
                         </div>
-
+                        <div class="form-group">
+                            <label for="date">Date:</label>
+                            <input type="date"
+                                    id="date" value="{{!empty($user->invest) ? $user->invest->date : ''}}"
+                                    class="form-control @error('date') is-invalid @enderror"
+                                    name="date">
+                                @error('date')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                        </div>
                         <div class="form-group">
                             <label for="initial_amount">Initial Investment:</label>
-                            <input type="text" id="initial_amount"
+                            <input type="number" id="initial_amount"
+                                    step="0.01"
                                     value="{{!empty($user->invest) ? $user->invest->amount : ''}}"
                                     class="form-control @error('initial_amount') is-invalid @enderror"
                                     placeholder="Enter Pertner Amount..."
@@ -82,7 +94,15 @@
                                 </span>
                             @enderror
                         </div>
-
+                        <div class="form-group">
+                            <label for="amount">Comment:</label>
+                            <textarea type="text" class="form-control @error('comment') is-invalid @enderror" rows="3"  name="comment">{{!empty($user->invest) ? $user->invest->comment : ''}}</textarea>
+                            @error('comment')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
                         <div class="form-group">
                             <label for="address">Address:</label>
                             <textarea type="text"  class="form-control @error('address') is-invalid @enderror" rows="4"  name="address">{{!empty($user) ? $user->address : ''}}</textarea>
@@ -92,7 +112,29 @@
                                 </span>
                             @enderror
                         </div>
-
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label for="password"><h4>New Password</h4></label>
+                                <div class="d-flex align-items-center">
+                                <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password" placeholder="new password" >
+                                <a class="ml-2" id="show_pass"><i class="fas fa-eye"></i></a>
+                            </div>
+                            </div>
+                            @error('password')
+                                  <span class="invalid-feedback" role="alert">
+                                      <strong>{{ $message }}</strong>
+                                  </span>
+                              @enderror
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label for="password-confirm"><h4>Again Password</h4></label>
+                                <div class="d-flex align-items-center">
+                                <input  placeholder="Retype password" type="password" id="password-confirm" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                <a class="ml-2" id="show_pass_con"><i class="fas fa-eye"></i></a>
+                            </div>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">
                                 Save
@@ -111,6 +153,17 @@
 @push('js')
 
 <script type="text/javascript">
+
+    $('#show_pass').on('click', function (e) {
+        let type = $('#password').attr('type')
+        let con_type = $('#password-confirm').attr('type')
+        type === 'password' ? $('#password').attr('type', 'text') : $('#password').attr('type', 'password')
+    })
+    $('#show_pass_con').on('click', function (e) {
+        let type = $('#password-confirm').attr('type')
+
+        type === 'password' ? $('#password-confirm').attr('type', 'text') : $('#password-confirm').attr('type', 'password')
+    })
     // dynamic dependent value change by income title...
     $(document).ready(function(){
 

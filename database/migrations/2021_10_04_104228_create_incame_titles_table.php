@@ -16,7 +16,7 @@ class CreateIncameTitlesTable extends Migration
         Schema::create('incame_titles', function (Blueprint $table) {
             $table->id();
             $table->string('title')->nullable();
-            $table->unsignedBigInteger('incame_categorie_id')->nullable();
+            $table->unsignedBigInteger('categorie_id')->nullable();
             $table->timestamps();
         });
     }
